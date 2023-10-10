@@ -4,12 +4,16 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
-import { WalletConnect } from "./components/ConnectWallet";
+import { ERC721 } from "./page/ERC721";
+import { alchemyProvider } from "wagmi/providers/alchemy";
 
 const App = () => {
   const { chains, publicClient } = configureChains(
     [polygonMumbai],
-    [publicProvider()]
+    [
+      alchemyProvider({ apiKey: import.meta.env.VITE_API_KEY }),
+      publicProvider(),
+    ]
   );
 
   const { connectors } = getDefaultWallets({
@@ -27,7 +31,7 @@ const App = () => {
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
-        <WalletConnect />
+        <ERC721 />
       </RainbowKitProvider>
     </WagmiConfig>
   );
