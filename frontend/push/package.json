@@ -12,6 +12,8 @@
   "dependencies": {
     "@pushprotocol/restapi": "^1.4.22",
     "@rainbow-me/rainbowkit": "^1.1.1",
+    "@web3-react/core": "6.1.9",
+    "ethers": "^5.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "viem": "^1.16.2",
