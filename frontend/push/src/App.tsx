@@ -4,8 +4,9 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-function App() {
+import { WalletConnect } from "./components/ConnectWallet";
+
+const App = () => {
   const { chains, publicClient } = configureChains(
     [polygonMumbai],
     [publicProvider()]
@@ -13,7 +14,7 @@ function App() {
 
   const { connectors } = getDefaultWallets({
     appName: "ERC721 X Push",
-    projectId: "35c4bd3c57eba150a2efa9e720b3e75a",
+    projectId: import.meta.env.VITE_PROJECT_ID,
     chains,
   });
 
@@ -22,13 +23,14 @@ function App() {
     connectors,
     publicClient,
   });
+
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
-        <ConnectButton />
+        <WalletConnect />
       </RainbowKitProvider>
     </WagmiConfig>
   );
-}
+};
 
 export default App;
